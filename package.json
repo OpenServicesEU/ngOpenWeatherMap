@@ -1,5 +1,5 @@
 {
-  "name": "ng-openweathermap",
+  "name": "ngOpenWeatherMap",
   "version": "1.0.0",
   "main": "Gruntfile.js",
   "devDependencies": {
