@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/1.3.2/css/weather-icons.css">
+  <title>ngOpenWeatherMap</title>
+</head>
+<body ng-app="demo" ng-controller="DemoCtrl">
+  <h1>ngOpenWeatherMap Demo App</h1>
+  City name: <input type="text" placeholder="New York,US" ng-model="city"/>
+  <button ng-click="searchCity(city)">Search</button>
+  <button ng-click="geoLocate()" ng-show="geoLocate">GeoLocation</button>
+  <p ng-show="message">{{ message }}</p>
+  <div ng-show="current">
+    <h2>
+      {{ current.name }},{{ current.sys.country }}
+      [ID:{{ current.id }}]
+      (N{{ current.coord.lat }}/W{{ current.coord.lon }})
+    </h2>
+    OpenWeatherMap API response status: <code>{{ current.cod }}</code>
+    <h3>Weather</h3>
+    <div>Temperature: {{ current.main.temp }}°C (Max: {{ current.main.temp_max }}°C / Min: {{ current.main.temp_min }}°C)</div>
+    <div>Pressure: {{ current.main.pressure }}hPa</div>
+    <div>Humidity: {{ current.main.humidity }}%</div>
+    <div>Visibility: {{ current.visibility }}</div>
+    <div>Wind speed: {{ current.wind.speed }}m/s</div>
+    <div>Wind direction: {{ current.wind.deg }}°</div>
+    <div>Cloudiness: {{ current.clouds.all }} %</div>
+    <div>Rain last 1h: {{ current.rain['1h'] }} %</div>
+    <div>Snow last 1h: {{ current.snow['1h'] }} %</div>
+    <div>Sunrise: {{ current.sys.sunrise*1000 |date:'medium' }} UTC</div>
+    <div>Sunset: {{ current.sys.sunset*1000 |date:'medium' }} UTC</div>
+    <h3>Current Conditions</h3>
+    <ul ng-repeat="condition in current.weather">
+      <li>
+        <owm-icon id="{{ condition.id }}"></owm-icon>
+        {{ condition.main }} ({{ condition.description }})
+      </li>
+    </ul>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+  <script src="ng-openweathermap.js"></script>
+  <script>
+    angular.module("demo", ['ngOpenWeatherMap'])
+    .config(['owmProvider', function(owmProvider) {
+      owmProvider
+        .setApiKey('xxxx')
+        .useMetric();
+    }])
+    .controller('DemoCtrl', [
+        '$scope',
+        'owm',
+        function($scope, owm) {
+          var setWeather = function(weather) {
+            $scope.current = weather;
+            $scope.message = undefined;
+          };
+          $scope.searchCity = function(city) {
+            owm.current.find(city).then(setWeather);
+          };
+          if (navigator.geolocation) {
+            $scope.geoLocate = function() {
+              navigator.geolocation.getCurrentPosition(
+                function(position) {
+                  owm.current.coordinates(position.coords.latitude, position.coords.longitude).then(setWeather);
+                },
+                function(error) {
+                  $scope.$apply(function() {
+                    $scope.message = 'Could not use geolocation API: ' + error.message;
+                  });
+                }
+              );
+            };
+          }
+        }
+    ]);
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "ng-openweathermap",
+  "authors": [
+    "Michael Fladischer <michael@openservices.at>"
+  ],
+  "description": "Angular.js provider to fetch weather data using Openweathermap API.",
+  "main": "./ng-openweathermap.js",
+  "keywords": [
+    "angular",
+    "openweathermap"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/OpenServices/ngOpenWeatherMap",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular": "~1.4.1"
+  }
+}
