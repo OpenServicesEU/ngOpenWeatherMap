@@ -10,7 +10,7 @@
     "openweathermap"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/OpenServices/ngOpenWeatherMap",
+  "homepage": "https://github.com/OpenServicesEU/ngOpenWeatherMap",
   "ignore": [
     "**/.*",
     "node_modules",
