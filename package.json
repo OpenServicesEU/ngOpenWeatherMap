@@ -1,6 +1,6 @@
 {
   "name": "ngOpenWeatherMap",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "gruntfile.js",
   "devDependencies": {
     "bower": "^1.4.1",
