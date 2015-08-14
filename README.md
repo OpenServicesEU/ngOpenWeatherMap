@@ -2,6 +2,7 @@ ngOpenWeatherMap
 ================
 
 [![Build Status](https://travis-ci.org/OpenServicesEU/ngOpenWeatherMap.svg?branch=master)](https://travis-ci.org/OpenServicesEU/ngOpenWeatherMap)
+[![Bower version](https://badge.fury.io/bo/ngOpenWeatherMap.svg)](http://badge.fury.io/bo/ngOpenWeatherMap)
 
 Angular.js provider for fetching current weather and forecasts (5 days and 16
 days) using Openweathermap API. It only fetches the requested data, and leaves
