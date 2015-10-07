@@ -216,7 +216,7 @@
         $http
         .get(url)
         .then(function(data, status, headers, config) {
-          if (data.data.cod === 200) {
+          if (parseInt(data.data.cod) === 200) {
             deferred.resolve(data.data);
           } else {
             deferred.reject(data.data);
